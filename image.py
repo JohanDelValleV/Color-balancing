@@ -74,20 +74,21 @@ def processImageWithMax():
 
     cv2.imshow('New image', image)
 
+
 def processImageWithShades():
     minimo = []
-    p=5
+    p = 5.5
     image = cv2.imread(pathIn)
     cv2.imshow('Original', image)
-    SB = np.sum(np.power(image[:, :, 0],p))
-    SG = np.sum(np.power(image[:, :, 1],p))
-    SR = np.sum(np.power(image[:, :, 2],p))
+    SB = np.sum(image[:, :, 0]**p)**(1/p)
+    SG = np.sum(image[:, :, 1]**p)**(1/p)
+    SR = np.sum(image[:, :, 2]**p)**(1/p)
 
     print(f'SB:{SB}, SG:{SG}, SR:{SR}')
 
-    minimo.append(np.power(SB,1/p))
-    minimo.append(np.power(SG,1/p))
-    minimo.append(np.power(SR,1/p))
+    minimo.append(SB)
+    minimo.append(SG)
+    minimo.append(SR)
 
     Smin = np.amin(minimo)
     print(f'Min: {Smin}')
@@ -103,7 +104,6 @@ def processImageWithShades():
 
     cv2.imshow('New image', image)
     cv2.waitKey()
-    
 
 
 Button(interface, text='Seleccionar imagen',
