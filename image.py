@@ -101,7 +101,10 @@ def scaleByMax():
 
 def shadesOfGray():
     minimo = []
-    p = float(entry.get())
+    if len(entry.get()) is 0:
+        messagebox.showwarning("¡ERROR!", "P en blanco")
+    else:
+        p = float(entry.get())
     if pathIn == "":
         messagebox.showwarning("¡ERROR!", "Debes seleccionar una imagen")
     else:
