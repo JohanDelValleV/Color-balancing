@@ -24,7 +24,7 @@ def openFile():
         title="Seleccionar archivo de video", filetypes=[("Image File", '.jpg'), ("Image File", '.png'), ("Image File", '.jpeg')])
     pathIn = imagenPath
     if pathIn == "":
-        messagebox.showinfo("¡ERROR!", "Debes seleccionar una imagen")
+        messagebox.showwarning("¡ERROR!", "Debes seleccionar una imagen")
 
     interface.mainloop()
 
@@ -32,7 +32,7 @@ def openFile():
 def grayWorld():
     minimo = []
     if pathIn == "":
-        messagebox.showinfo("¡ERROR!", "Debes seleccionar una imagen")
+        messagebox.showwarning("¡ERROR!", "Debes seleccionar una imagen")
     else:
         image = cv2.imread(pathIn)
         cv2.imshow('Original', image)
@@ -64,7 +64,7 @@ def grayWorld():
 def scaleByMax():
     maximo = []
     if pathIn == "":
-        messagebox.showinfo("¡ERROR!", "Debes seleccionar una imagen")
+        messagebox.showwarning("¡ERROR!", "Debes seleccionar una imagen")
     else:
         image = cv2.imread(pathIn)
         cv2.imshow('Original', image)
@@ -98,7 +98,7 @@ def shadesOfGray():
     minimo = []
     p = float(entry.get())
     if pathIn == "":
-        messagebox.showinfo("¡ERROR!", "Debes seleccionar una imagen")
+        messagebox.showwarning("¡ERROR!", "Debes seleccionar una imagen")
     else:
         image = cv2.imread(pathIn)
         cv2.imshow('Original', image)
@@ -135,7 +135,7 @@ def checkCombo():
     elif combo.get() == "Shades-of-gray":
         shadesOfGray()
     elif combo.get() == "":
-        messagebox.showinfo("¡ERROR!")
+        messagebox.showwarning("¡ERROR!")
 
 
 photo = PhotoImage(file=r"btn.png")
