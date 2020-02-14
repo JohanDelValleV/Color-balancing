@@ -1,6 +1,7 @@
 import cv2
 import numpy as np
 import tkinter as tk
+from matplotlib import pyplot as plt
 from tkinter import *
 from tkinter import ttk
 from tkinter import filedialog
@@ -35,6 +36,7 @@ def grayWorld():
         messagebox.showwarning("¡ERROR!", "Debes seleccionar una imagen")
     else:
         image = cv2.imread(pathIn)
+        image2 = cv2.imread(pathIn)
         cv2.imshow('Original', image)
         SB = np.sum(image[:, :, 0])
         SG = np.sum(image[:, :, 1])
@@ -59,6 +61,7 @@ def grayWorld():
         image[:, :, 2] = image[:, :, 2] * KR
 
         cv2.imshow('New image', image)
+        showGraphs(image2, image, 'Gray World')
 
 
 def scaleByMax():
@@ -67,6 +70,7 @@ def scaleByMax():
         messagebox.showwarning("¡ERROR!", "Debes seleccionar una imagen")
     else:
         image = cv2.imread(pathIn)
+        image2 = cv2.imread(pathIn)
         cv2.imshow('Original', image)
         SB = np.amax(image[:, :, 0])
         SG = np.amax(image[:, :, 1])
@@ -92,6 +96,7 @@ def scaleByMax():
         image[:, :, 2] = image[:, :, 2] * KR
 
         cv2.imshow('New image', image)
+        showGraphs(image2, image, 'Scale By Max')
 
 
 def shadesOfGray():
@@ -101,6 +106,7 @@ def shadesOfGray():
         messagebox.showwarning("¡ERROR!", "Debes seleccionar una imagen")
     else:
         image = cv2.imread(pathIn)
+        image2 = cv2.imread(pathIn)
         cv2.imshow('Original', image)
         SB = np.sum(image[:, :, 0]**p)**(1/p)
         SG = np.sum(image[:, :, 1]**p)**(1/p)
@@ -125,17 +131,37 @@ def shadesOfGray():
         image[:, :, 2] = image[:, :, 2] * KR
 
         cv2.imshow('New image', image)
+        showGraphs(image2, image, 'Shades Of Gray')
 
 
 def checkCombo():
     if combo.get() == "Gray-world":
         grayWorld()
+        showGraphs()
     elif combo.get() == "Scale-by-max":
         scaleByMax()
     elif combo.get() == "Shades-of-gray":
         shadesOfGray()
     elif combo.get() == "":
         messagebox.showwarning("¡ERROR!")
+
+
+def showGraphs(img, img2, text):
+    fig, grafica = plt.subplots(2)
+    grafica[0].set_title('Imagen original')
+    grafica[0].grid()
+    grafica[1].set_title(text)
+    grafica[1].grid()
+    color = ('b', 'g', 'r')
+    for i, col in enumerate(color):
+        histr = cv2.calcHist([img], [i], None, [256], [0, 256])
+        grafica[0].plot(histr, color=col)
+        # grafica[0].xlim([0, 256])
+    for i, col in enumerate(color):
+        histr = cv2.calcHist([img2], [i], None, [256], [0, 256])
+        grafica[1].plot(histr, color=col)
+        # grafica[1].xlim([0, 256])
+    plt.show()
 
 
 photo = PhotoImage(file=r"btn.png")
