@@ -3,9 +3,7 @@ import numpy as np
 import tkinter as tk
 from matplotlib import pyplot as plt
 from tkinter import *
-from tkinter import ttk
-from tkinter import filedialog
-from tkinter import messagebox
+from tkinter import ttk, filedialog, messagebox
 
 pathIn = ''
 interface = Tk()
