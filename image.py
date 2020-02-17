@@ -159,11 +159,9 @@ def showGraphs(img, img2, text):
     for i, col in enumerate(color):
         histr = cv2.calcHist([img], [i], None, [256], [0, 256])
         grafica[0].plot(histr, color=col)
-        # grafica[0].xlim([0, 256])
     for i, col in enumerate(color):
         histr = cv2.calcHist([img2], [i], None, [256], [0, 256])
         grafica[1].plot(histr, color=col)
-        # grafica[1].xlim([0, 256])
     plt.show()
 
 
